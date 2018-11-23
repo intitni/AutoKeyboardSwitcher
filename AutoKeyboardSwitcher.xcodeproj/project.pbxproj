@@ -246,6 +246,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YKZ4Y3DAW;
+				INFOPLIST_FILE = "$(SRCROOT)/AutoKeyboardSwitcher/info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
@@ -256,6 +257,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5YKZ4Y3DAW;
+				INFOPLIST_FILE = "$(SRCROOT)/AutoKeyboardSwitcher/info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};
