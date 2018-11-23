@@ -4,7 +4,7 @@ This is a simple command line tool to switch input method for you according to t
 
 To use it, just launch the tool any way you like. 
 
-Not really. Before that, you will need to create a file at `~/Documents/AutoKeyboardSwitcher.json`, and type in the rules.
+Not really. Before that, you will need to create a configuration file in JSON format with rules.
 
 ```json
 {
@@ -14,4 +14,6 @@ Not really. Before that, you will need to create a file at `~/Documents/AutoKeyb
 }
 ```
 
-If you want a different path, change it in code.
+You may use the configuration file with argument `--conf` following by the file path. You may use `--verbose` to inspect outputs, for example, to get identifiers of apps when you switch between apps.
+
+You are recommended to use launchd to start the tool on startup.
