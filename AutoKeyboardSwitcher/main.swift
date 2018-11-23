@@ -11,7 +11,7 @@ struct Arguments {
     
     init(_ arguments: [String]) {
         self.conf = {
-            guard let i = arguments.firstIndex(of: "--conf"), i < arguments.endIndex else { return defaultPath }
+            guard let i = arguments.firstIndex(of: "--conf"), i < arguments.endIndex - 1 else { return defaultPath }
             let p = arguments[i + 1]
             if let first = p.first, first == "~" {
                 return FileManager.default.homeDirectoryForCurrentUser.path + String(p[p.index(after: p.startIndex)...])
