@@ -8,6 +8,7 @@ Not really. Before that, you will need to create a configuration file in JSON fo
 
 ```json
 {
+    "default": "zh-cn", "//": "for everything else",
     "com.apple.dt.Xcode": "en",
     "com.googlecode.iterm2": "en",
     "com.microsoft.VSCode": "en"
