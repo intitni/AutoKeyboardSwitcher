@@ -62,14 +62,21 @@ class Observer: NSObject {
         
         if let language = pref[identifier] {
             verboseDo { print("Best Match! Switching to source of name \(language)") }
-            guard let source = TISCopyInputSourceForLanguage(language as CFString) else {
-                verboseDo { print("Source for \(language) not found") }
-                return
-            }
-            let value = source.takeRetainedValue()
-            TISSelectInputSource(value)
-            verboseDo { print("Done!") }
+            switchToLanguage(language)
+        } else if let language = pref["default"] {
+            verboseDo { print("Switching to default source of name \(language)") }
+            switchToLanguage(language)
         }
+    }
+    
+    func switchToLanguage(_ language: String) {
+        guard let source = TISCopyInputSourceForLanguage(language as CFString) else {
+            verboseDo { print("Source for \(language) not found") }
+            return
+        }
+        let value = source.takeRetainedValue()
+        TISSelectInputSource(value)
+        verboseDo { print("Done!") }
     }
 
     private func verboseDo(_ block: ()->Void) {
