@@ -1,9 +1,18 @@
 import AppKit
 import Carbon
 
-typealias Pref = [String: String]
-
 let defaultPath = "\(FileManager.default.homeDirectoryForCurrentUser.path)/Documents/AutoKeyboardSwitcher.json"
+
+struct Pref: Codable {
+    struct InputSource: Codable {
+        let language: String?
+        let inputSourceId: String?
+    }
+    let apps: [String: InputSource]
+    let defaultInputSource: InputSource?
+    
+    static var empty: Pref { return .init(apps: [:], defaultInputSource: nil) }
+}
 
 struct Arguments {
     let conf: String
@@ -28,12 +37,12 @@ class Observer: NSObject {
     var pref: Pref {
         guard let data = FileManager().contents(atPath: confPath) else {
             verboseDo { print("\(confPath) not found") }
-            return [:]
+            return .empty
         }
         let decoder = JSONDecoder()
         guard let result = try? decoder.decode(Pref.self, from: data) else {
             verboseDo { print("\(confPath) format incorrect") }
-            return [:]
+            return .empty
         }
         return result
     }
@@ -60,25 +69,55 @@ class Observer: NSObject {
         guard let identifier = info.bundleIdentifier else { return }
         verboseDo { print("Switch to app: \(identifier)") }
         
-        if let language = pref[identifier] {
-            verboseDo { print("Best Match! Switching to source of name \(language)") }
-            switchToLanguage(language)
-        } else if let language = pref["default"] {
-            verboseDo { print("Switching to default source of name \(language)") }
-            switchToLanguage(language)
+        if let source = pref.apps[identifier] {
+            switchToInputSource(source)
+        } else if let defaultInputSource = pref.defaultInputSource {
+            verboseDo { print("Switching to default source") }
+            switchToInputSource(defaultInputSource)
         }
     }
     
-    func switchToLanguage(_ language: String) {
-        guard let source = TISCopyInputSourceForLanguage(language as CFString) else {
-            verboseDo { print("Source for \(language) not found") }
-            return
+    func switchToInputSource(_ source: Pref.InputSource) {
+        func switchToLanguage(_ language: String) {
+            guard let source = TISCopyInputSourceForLanguage(language as CFString) else {
+                verboseDo { print("Source for \(language) not found") }
+                return
+            }
+            let value = source.takeRetainedValue()
+            TISSelectInputSource(value)
+            verboseDo { print("Done!") }
         }
-        let value = source.takeRetainedValue()
-        TISSelectInputSource(value)
-        verboseDo { print("Done!") }
+        
+        func switchToInputSourceId(_ id: String) {
+            func allInputSources() -> Array<TISInputSource> {
+                let selectableIsProperties = [
+                    kTISPropertyInputSourceIsEnableCapable: true,
+                    kTISPropertyInputSourceCategory: kTISCategoryKeyboardInputSource,
+                    ] as CFDictionary
+                return TISCreateInputSourceList(selectableIsProperties, false).takeUnretainedValue() as! [TISInputSource]
+            }
+            
+            guard let inputSourceOfId = allInputSources().first(where: {
+                guard let rawid = TISGetInputSourceProperty($0, kTISPropertyInputSourceID) else { return false }
+                let cfString = Unmanaged<CFString>.fromOpaque(rawid).takeUnretainedValue()
+                return id == cfString as String
+            }) else {
+                verboseDo { print("Source for \(id) not found") }
+                return
+            }
+            TISSelectInputSource(inputSourceOfId)
+            verboseDo { print("Done!") }
+        }
+        
+        if let language = source.language {
+            verboseDo { print("Best Match! Switching to source of name \(language)") }
+            switchToLanguage(language)
+        } else if let inputSourceId = source.inputSourceId {
+            verboseDo { print("Best Match! Switching to source of id \(inputSourceId)") }
+            switchToInputSourceId(inputSourceId)
+        }
     }
-
+    
     private func verboseDo(_ block: ()->Void) {
         if verbose { block() }
     }
@@ -87,4 +126,4 @@ class Observer: NSObject {
 let args = Arguments(CommandLine.arguments)
 let observer = Observer(confPath: args.conf, verbose: args.verbose)
 
-RunLoop.main.run()
+CFRunLoopRun()
