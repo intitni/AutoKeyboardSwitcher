@@ -8,13 +8,29 @@ Not really. Before that, you will need to create a configuration file in JSON fo
 
 ```json
 {
-    "default": "zh-cn", "//": "for everything else",
-    "com.apple.dt.Xcode": "en",
-    "com.googlecode.iterm2": "en",
-    "com.microsoft.VSCode": "en"
+    "apps": {
+        "com.apple.dt.Xcode": {
+            "language": "en"
+        },
+        "com.googlecode.iterm2": {
+            "inputSourceId": "com.apple.keylayout.ABC"
+        },
+        "com.microsoft.VSCode": {
+            "inputSourceId": "com.apple.keylayout.ABC"
+        },
+        "co.zeit.hyper": {
+            "inputSourceId": "com.apple.keylayout.ABC"
+        },
+        "com.tencent.qq": {
+            "inputSourceId": "com.apple.inputmethod.SCIM.ITABC"
+        }
+    },
+    "defaultInputSource": {
+        "inputSourceId": "com.apple.keylayout.ABC"
+    }
 }
 ```
 
-You may use the configuration file with argument `--conf` following by the file path. You may use `--verbose` to inspect outputs, for example, to get identifiers of apps when you switch between apps.
+You may specify configuration path with argument `--conf` following by the file path. 
 
-You are recommended to use launchd to start the tool on startup.
+You may use `--verbose` to inspect outputs, for example, to get identifiers of apps when you switch between apps.
