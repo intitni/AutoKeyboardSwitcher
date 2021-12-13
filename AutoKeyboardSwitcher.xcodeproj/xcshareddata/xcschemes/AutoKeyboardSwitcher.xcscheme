@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1310"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13C2E448219C790400279F37"
-               BuildableName = "AutoKeyboardSwitcher"
+               BlueprintIdentifier = "C8CE957527576C0E00567E9F"
+               BuildableName = "AutoKeyboardSwitcher.app"
                BlueprintName = "AutoKeyboardSwitcher"
                ReferencedContainer = "container:AutoKeyboardSwitcher.xcodeproj">
             </BuildableReference>
@@ -27,19 +27,37 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13C2E448219C790400279F37"
-            BuildableName = "AutoKeyboardSwitcher"
+            BlueprintIdentifier = "C8CE957527576C0E00567E9F"
+            BuildableName = "AutoKeyboardSwitcher.app"
             BlueprintName = "AutoKeyboardSwitcher"
             ReferencedContainer = "container:AutoKeyboardSwitcher.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C8BDD2F327565A7D00EE8F37"
+               BuildableName = "AutoKeyboardSwitcherTests.xctest"
+               BlueprintName = "AutoKeyboardSwitcherTests"
+               ReferencedContainer = "container:AutoKeyboardSwitcher.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C8BDD2FD27565A7D00EE8F37"
+               BuildableName = "AutoKeyboardSwitcherUITests.xctest"
+               BlueprintName = "AutoKeyboardSwitcherUITests"
+               ReferencedContainer = "container:AutoKeyboardSwitcher.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -55,8 +73,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13C2E448219C790400279F37"
-            BuildableName = "AutoKeyboardSwitcher"
+            BlueprintIdentifier = "C8CE957527576C0E00567E9F"
+            BuildableName = "AutoKeyboardSwitcher.app"
             BlueprintName = "AutoKeyboardSwitcher"
             ReferencedContainer = "container:AutoKeyboardSwitcher.xcodeproj">
          </BuildableReference>
@@ -75,8 +93,6 @@
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -88,8 +104,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13C2E448219C790400279F37"
-            BuildableName = "AutoKeyboardSwitcher"
+            BlueprintIdentifier = "C8CE957527576C0E00567E9F"
+            BuildableName = "AutoKeyboardSwitcher.app"
             BlueprintName = "AutoKeyboardSwitcher"
             ReferencedContainer = "container:AutoKeyboardSwitcher.xcodeproj">
          </BuildableReference>
