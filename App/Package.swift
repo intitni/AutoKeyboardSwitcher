@@ -11,10 +11,16 @@ let package = Package(
             name: "App",
             targets: ["App"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            name: "LaunchAtLogin",
+            url: "https://github.com/sindresorhus/LaunchAtLogin",
+            .upToNextMajor(from: "4.2.0")
+        ),
+    ],
     targets: [
         .target(
             name: "App",
-            dependencies: []),
+            dependencies: ["LaunchAtLogin"]),
     ]
 )

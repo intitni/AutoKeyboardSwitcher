@@ -1,7 +1,9 @@
 import SwiftUI
+import LaunchAtLogin
 
 struct PreferencesView: View {
     @ObservedObject var viewModel: PreferencesViewModel
+    @ObservedObject private var launchAtLogin = LaunchAtLogin.observable
 
     init(viewModel: PreferencesViewModel) {
         self.viewModel = viewModel
@@ -12,6 +14,7 @@ struct PreferencesView: View {
             FilePicker(viewModel: viewModel)
             Text(viewModel.frontmostAppName)
             Text(viewModel.frontmostAppIdentifier)
+            Toggle("Launch at start", isOn: $launchAtLogin.isEnabled)
         }
         .padding()
         .frame(maxWidth: .infinity)
